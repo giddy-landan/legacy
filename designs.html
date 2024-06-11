@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td {
+  border-collapse: collapse;
+  width: 100%;
+}
+.ex1 {
+  background-color: white;
+  width: 100px;
+  overflow-x: auto;
+  text-align: center;
+}
+.ex2 {
+  background-color: white;
+  width: 20%;
+  height: 100px;
+  text-align: center;
+}
+	/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+.demo {
+  opacity: 0.6;
+	max-height:100px;
+	max-width:90%;
+}
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
+</head>
+
+<body style='text-align:center;display:block;margin:auto;font: 15px Arial, sans-serif;'>
+  <table id="grps">  
+  </table>
+
+	<script>
+	let grps=[{n:"Recombinations", m:29, p:"r"},
+			  {n:"Sculptures", m:15, p:"s"},
+			  {n:"Jigsaw", m:16, p:"g"},
+			  {n:"Origami", m:14, p:"o"},
+			  {n:"Assorted", m:26, p:"a"}];
+  
+  function grpshow(g){
+	  tmby="<hr>"
+	  for (let i = 1; i <grps[g].m+1; i++) {
+  		let t=  i + ".jpg"
+  		tmby += "<img class='demo cursor' onclick='imshow(this.src)' src='thumbnails/" +grps[g].p + t.padStart(6,"0") + "'><hr>";
+	  }
+	  document.getElementById("tmby").innerHTML = tmby;
+	  imshow(grps[g].p+'01.jpg');
+  }
+  
+  let grph=""
+    for (let i = 0; i <5; i++) {
+      grph +="<td class='ex2'><img class='demo cursor' src='images/"+grps[i].p+"00.jpg' onclick='grpshow("+i+")'><br>"+grps[i].n+"</td>"
+    }
+	document.getElementById("grps").innerHTML = grph;
+
+  </script>
+	
+<div id="myDIV">
+  <table>
+	<tr id="ttr" style="width: 100px;">
+		<td id="ttd" style="width: 100px;">
+			<div class="ex1" id="tmby">
+    			Null
+			</div>
+		</td>
+		<td id='img' > 
+			wwww
+		</td>
+	</tr>
+  </table>
+</div>
+
+<script>
+  let vpw=window.innerWidth-100;
+  let vph=window.innerHeight-130;
+  let tmby = "";
+  let grp="s"
+  
+  function imshow(imgid){
+	  document.getElementById("img").innerHTML ='<img style="display:block;margin:auto;max-width:'+vpw*.9+'px;max-height:'+vph*.9+'px;" src="images/'+imgid.slice(-7)+'">'	;
+  }
+  document.getElementById("tmby").style.height = vph+'px';
+  document.getElementById("img").style = "width: "+vpw+"px; margin: auto;";
+  grpshow(0)
+</script>
+</body>
+</html>
